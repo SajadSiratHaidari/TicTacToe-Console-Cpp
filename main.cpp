@@ -2,6 +2,8 @@
 #include <cctype>
 #include <cstdlib>
 #include <conio.h>
+#include <ios>
+#include <limits>
 #include "TicTacToe.h"
 
 /*
@@ -17,6 +19,7 @@ char displayInputAndReturnData(char who, char pChar, TicTacToe &t)
 	std::cin >> rowIndex >> columnIndex;
 	if (rowIndex < 0 || rowIndex > 2 || columnIndex < 0 || columnIndex > 2)
 		return ILLIGAL_ROW_COLUMN_INDEX;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return t.set(rowIndex, columnIndex, who);
 }
 
@@ -48,7 +51,8 @@ int main()
     TicTacToe t;
     t.setPlayersCharacters(p1Char, p2Char);
     std::cout << "P1 = " << p1Char << "\nP2 = " << p2Char << "\n\n";
-
+	
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     while (true) {
 		t.printBoard();
 		while (true) {
@@ -60,10 +64,12 @@ int main()
 			case 1:
 				t.printBoard();
 				std::cout << "Player 1 wins!" << std::endl;
+				std::cin.get();
 				return 0;
 
 			case TTT_DRAW:
 				std::cout << "MATCH DRAW!" << std::endl;
+				std::cin.get();
 				return 0;
 
 			case TTT_NOT_EMPTY:
@@ -83,10 +89,12 @@ int main()
 			case 2:
 				t.printBoard();
 				std::cout << "Player 2 wins!" << std::endl;
+				std::cin.get();
 				return 0;
 
 			case TTT_DRAW:
 				std::cout << "MATCH DRAW!" << std::endl;
+				std::cin.get();
 				return 0;
 
 			case TTT_NOT_EMPTY:
@@ -133,6 +141,7 @@ int ticTacToeWithPC()
 	TicTacToe t;
 	t.setPlayersCharacters(p1Char, p2Char);
 	t.printBoard();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	while (true) {
 		unsigned char rowIndex, columnIndex;
 		if (playerOne == TTT_CLIENT) {
@@ -145,6 +154,7 @@ int ticTacToeWithPC()
 					std::cout << "Illigal row-column index." << std::endl;
 					continue;
 				}
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 				char retval = t.set(rowIndex, columnIndex, 1);
 				if (retval == TTT_NOT_EMPTY) {
@@ -156,10 +166,12 @@ int ticTacToeWithPC()
 				switch (retval) {
 				case TTT_DRAW:
 					std::cout << "MATCH DRAW!" << std::endl;
+					std::cin.get();
 					return 0;
 
 				case 1:
 					std::cout << "YOU WON!!!" << std::endl;
+					std::cin.get();
 					return 0;
 				}
 				break;
@@ -172,10 +184,12 @@ int ticTacToeWithPC()
 			switch (retval) {
 			case TTT_DRAW:
 				std::cout << "MATCH DRAW!" << std::endl;
+				std::cin.get();
 				return 0;
 
 			case 2:
 				std::cout << "COMPUTER WON!!!" << std::endl;
+				std::cin.get();
 				return 0;
 			}
 		} else {
@@ -186,10 +200,12 @@ int ticTacToeWithPC()
 			switch (retval) {
 			case TTT_DRAW:
 				std::cout << "MATCH DRAW!" << std::endl;
+				std::cin.get();
 				return 0;
 
 			case 1:
 				std::cout << "COMPUTER WON!!!" << std::endl;
+				std::cin.get();
 				return 0;
 			}
 
@@ -202,6 +218,7 @@ int ticTacToeWithPC()
 					std::cout << "Invalid row-column index." << std::endl;
 					continue;
 				}
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 				char retval = t.set(rowIndex, columnIndex, 2);
 				if (retval == TTT_NOT_EMPTY) {
@@ -213,10 +230,12 @@ int ticTacToeWithPC()
 				switch (retval) {
 				case TTT_DRAW:
 					std::cout << "MATCH DRAW!" << std::endl;
+					std::cin.get();
 					return 0;
 
 				case 2:
 					std::cout << "Player 2 wins!" << std::endl;
+					std::cin.get();
 					return 0;
 				}
 				break;
