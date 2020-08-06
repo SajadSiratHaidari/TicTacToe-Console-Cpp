@@ -12,7 +12,7 @@ class TicTacToe {
 private:
 	char board[3][3];
 	char p1Char, p2Char;
-	char numOfPlacesConsumed; // range = 0-8
+	char numOfPlacesConsumed; // count of places occupied
 
 	typedef struct {
 		unsigned char row;
@@ -20,7 +20,7 @@ private:
 	} TTT_Coord; // tic tac toe coordinate
 
 	/* Linear_Availables (although the name does not define the structure very well) is a structure
-	   that is used to access the available empty cells in the tic tac toe board for example the
+	   that is used to access the available empty cells in the tic tac toe board. For example the
 	   following board has two consumed cells and one empty cell in second row. In other words
 	   the second row is a Linear_Availables:
 	   -------------
